@@ -1,0 +1,362 @@
+{
+  "name": "My workflow 16",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1184,
+        -320
+      ],
+      "id": "36c2c8b2-49b9-4c87-96c7-f4553616188d",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Ab0yD36biFUEJe4R",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a873e903-0dff-42af-90f5-c68ff916cf91",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -736,
+        -176
+      ],
+      "id": "ff0f8bde-31ac-4195-87f5-bfc0e7dd09d6",
+      "name": "reply msg "
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9383ddea-6cf6-45ba-90ca-dcd1ab52f5fc",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -960,
+        -176
+      ],
+      "id": "fdf32a2f-63b4-4ef6-8bdd-66d379c06e8a",
+      "name": "message- mail.com (seen ) "
+    },
+    {
+      "parameters": {
+        "content": "Mail.account_",
+        "height": 384,
+        "width": 496
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1264,
+        -400
+      ],
+      "typeVersion": 1,
+      "id": "aff8bfd3-6893-4b7c-ab18-e5d12d324184",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        -512,
+        -176
+      ],
+      "id": "9cb2dd58-0752-4123-a28d-3c76af4ce7e9",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "content": "WRITE THE EMAIL REPLY ",
+        "height": 544,
+        "width": 592,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        -368
+      ],
+      "typeVersion": 1,
+      "id": "1473e4ee-27bf-4461-bc51-de4aa669431b",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        0
+      ],
+      "id": "edabce7b-f0b2-46dc-aa84-d857e9b06249",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "zWrgJYdDZhFknIOk",
+          "name": "OpenRouter account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "mishraatul7305@mail.com"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        -176
+      ],
+      "id": "12c5c441-8cc2-42bf-a920-7da6fd08de88",
+      "name": "Get a message",
+      "webhookId": "a912b4a0-09d9-43c3-8e09-8155d37be73c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nriBag2DIWOe0kgU",
+          "name": "Gmail account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## \n**Double click** to edit me",
+        "height": 848,
+        "width": 1168,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -784,
+        -608
+      ],
+      "typeVersion": 1,
+      "id": "ae05041f-638c-46bb-a479-a56893a5fb87",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "message": "hello ",
+        "options": {
+          "memoryConnection": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        -576
+      ],
+      "id": "3df431c7-1001-455e-bf3d-f6198580389a",
+      "name": "Chat",
+      "webhookId": "9dfa83c9-9671-4c8e-9336-574841470b3b"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -96,
+        -352
+      ],
+      "id": "e106248e-e787-4792-af12-3655116b2e4f",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "recipientPhoneNumber": "7009288115",
+        "textBody": "Atul_21",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        192,
+        -320
+      ],
+      "id": "2847bd5c-8d1b-45fa-a3c7-0c43ff2f5d20",
+      "name": "Send message",
+      "webhookId": "9f01e879-5d6a-4d40-a2c7-dc77556ed4c4",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "qg0dvH2k7hthRhBs",
+          "name": "WhatsApp account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "message- mail.com (seen ) ",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "message- mail.com (seen ) ": {
+      "main": [
+        [
+          {
+            "node": "reply msg ",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "reply msg ": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Get a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a53e6c9b-ef08-4b9c-a4b7-d32b65af524f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2d339825f732bd89c8c4f06f0fdb3902b8e764bcad0d9e0536f48bb89bccadba"
+  },
+  "id": "bcOhGejX10N023bc",
+  "tags": []
+}
